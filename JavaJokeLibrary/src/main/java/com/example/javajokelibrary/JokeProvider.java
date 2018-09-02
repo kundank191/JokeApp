@@ -18,7 +18,7 @@ public class JokeProvider {
         jokes.add("To understand what recursion is... \n You must first understand what recursion is");
         jokes.add("A ham sandwhich walks into a bar and orders a beer. The bartender says... \n I'm sorry, we don't serve food here");
         jokes.add("What's the best time to go to the dentist? \n Tooth hurty.");
-        jokes.add("Why can't bicycles stand on their own? \n hey are two tired");
+        jokes.add("Why can't bicycles stand on their own? \n They are two tired");
         return jokes;
     }
 }

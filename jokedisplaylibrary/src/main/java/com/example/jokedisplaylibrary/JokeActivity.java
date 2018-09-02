@@ -32,5 +32,6 @@ public class JokeActivity extends AppCompatActivity {
         recyclerView.setAdapter(jokeAdapter);
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+
     }
 }

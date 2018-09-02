@@ -15,11 +15,11 @@ import java.util.ArrayList;
  */
 public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView questionTV;
         TextView answerTV;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             questionTV = itemView.findViewById(R.id.question_tv);
             answerTV = itemView.findViewById(R.id.answer_tv);
@@ -29,7 +29,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
     private Context context;
     private ArrayList<String> listJokes;
 
-    public JokeAdapter(Context context, ArrayList<String> listJokes) {
+    JokeAdapter(Context context, ArrayList<String> listJokes) {
         this.context = context;
         this.listJokes = listJokes;
     }
