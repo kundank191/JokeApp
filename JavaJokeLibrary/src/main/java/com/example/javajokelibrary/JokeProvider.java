@@ -9,7 +9,7 @@ public class JokeProvider {
      *
      * @return a list of Jokes
      */
-    public List<Joke> getJokes(){
+    public static List<Joke> getJokes(){
         List<Joke> jokes = new LinkedList<>();
         jokes.add(new Joke("Why is peter pan always flying?","Because he neverlands"));
         jokes.add(new Joke("What happens to a frog's car when it breaks down?","It gets toad away"));
