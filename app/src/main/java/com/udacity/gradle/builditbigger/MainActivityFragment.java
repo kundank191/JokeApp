@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.Group;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.jokedisplaylibrary.JokeActivity;
 import com.google.android.gms.ads.AdRequest;
@@ -24,6 +24,10 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -31,7 +35,13 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment {
 
     private static MyApi myApiService = null;
-    private static TextView jokeTV;
+    @BindView(R.id.loading_group)
+    Group progressViewGroup;
+    @BindView(R.id.content_group)
+    Group contentViewGroup;
+    @BindView(R.id.adView)
+    AdView adView;
+
     public MainActivityFragment() {
     }
 
@@ -40,30 +50,45 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        AdView mAdView = (AdView) root.findViewById(R.id.adView);
-        jokeTV = root.findViewById(R.id.joke_text_view);
+        ButterKnife.bind(this,root);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-        mAdView.loadAd(adRequest);
+        adView.loadAd(adRequest);
         return root;
     }
 
-    /**
-     *
-     * @param view the tell joke button
-     */
-    public void tellJoke(View view){
+    @Override
+    public void onStart() {
+        super.onStart();
+        hideLoadingUi();
+    }
+
+    @OnClick(R.id.tell_joke_button)
+    public void tellJoke(){
+        displayLoadingUI();
         EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
         asyncTask.execute(new Pair<Context, String>(getActivity(), "Manfred"));
 
     }
 
-    public static void displayLoadingUI(){
+    /**
+     * Shows a loading screen when jokes are being requested
+     */
+    public void displayLoadingUI(){
+        progressViewGroup.setVisibility(View.VISIBLE);
+        contentViewGroup.setVisibility(View.GONE);
+    }
 
+    /**
+     * Hides the loading screen when more jokes has to be requested
+     */
+    public void hideLoadingUi(){
+        progressViewGroup.setVisibility(View.GONE);
+        contentViewGroup.setVisibility(View.VISIBLE);
     }
 
     static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, ArrayList<String>> {
@@ -103,7 +128,6 @@ public class MainActivityFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            displayLoadingUI();
         }
 
         @Override
