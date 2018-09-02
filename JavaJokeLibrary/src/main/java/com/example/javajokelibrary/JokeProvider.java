@@ -1,7 +1,6 @@
 package com.example.javajokelibrary;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 
 public class JokeProvider {
 
@@ -9,8 +8,8 @@ public class JokeProvider {
      *
      * @return a list of Jokes
      */
-    public static List<String> getJokes(){
-        List<String> jokes = new LinkedList<>();
+    public static ArrayList<String> getJokes(){
+        ArrayList<String> jokes = new ArrayList<>();
         jokes.add("Why is peter pan always flying \n Because he neverlands");
         jokes.add("What happens to a frog's car when it breaks down? \n It gets toad away");
         jokes.add("What did the duck say when he bought lipstick? \n Put it on my bill");

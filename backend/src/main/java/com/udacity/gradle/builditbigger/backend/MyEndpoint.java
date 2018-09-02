@@ -5,8 +5,6 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
-import javax.inject.Named;
-
 /** An endpoint class we are exposing */
 @Api(
         name = "myApi",
@@ -19,13 +17,10 @@ import javax.inject.Named;
 )
 public class MyEndpoint {
 
-    /** A simple endpoint method that takes a name and says Hi back */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
-        MyBean response = new MyBean();
-        return response;
-    }
-
+    /**
+     *
+     * @return a MyBean object which has a list of jokes
+     */
     @ApiMethod(name = "getJoke")
     public MyBean getJoke(){
         MyBean response = new MyBean();

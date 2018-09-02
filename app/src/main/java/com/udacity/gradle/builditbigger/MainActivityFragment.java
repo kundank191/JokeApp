@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jokedisplaylibrary.JokeActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -20,6 +22,7 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -46,22 +49,29 @@ public class MainActivityFragment extends Fragment {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
-
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(getActivity(), "Manfred"));
-
         return root;
     }
 
-    public static void onJokeLoaded(String joke){
-        jokeTV.setText(joke);
+    /**
+     *
+     * @param view the tell joke button
+     */
+    public void tellJoke(View view){
+        EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
+        asyncTask.execute(new Pair<Context, String>(getActivity(), "Manfred"));
+
     }
 
-    static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-        private Context context;
+    public static void displayLoadingUI(){
+
+    }
+
+    static class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, ArrayList<String>> {
+        Context context;
 
         @SafeVarargs
         @Override
-        protected final String doInBackground(Pair<Context, String>... params) {
+        protected final ArrayList<String> doInBackground(Pair<Context, String>... params) {
             if(myApiService == null) {  // Only do this once
                 MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                         new AndroidJsonFactory(), null)
@@ -82,18 +92,26 @@ public class MainActivityFragment extends Fragment {
 
             context = params[0].first;
             String name = params[0].second;
-
             try {
-                return myApiService.getJoke().execute().getData();
-                //return myApiService.sayHi(name).execute().getData();
-            } catch (IOException e) {
-                return e.getMessage();
+                return (ArrayList<String>) myApiService.getJoke().execute().getJokes();
+            } catch (IOException e){
+                e.printStackTrace();
+                return null;
             }
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            onJokeLoaded(result);
+        protected void onPreExecute() {
+            super.onPreExecute();
+            displayLoadingUI();
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> jokes) {
+            Intent intent = new Intent(context, JokeActivity.class);
+            intent.putStringArrayListExtra(JokeActivity.INTENT_KEY_JOKES,jokes);
+            context.startActivity(intent);
+            context = null;
         }
     }
 }
