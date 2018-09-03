@@ -66,7 +66,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
     }
 
     /**
-     * @param typeColor takes the pallete ID
+     * @param typeColor takes the palette ID
      * @return a random color from a list of colors
      */
     private int getMatColor(String typeColor) {
