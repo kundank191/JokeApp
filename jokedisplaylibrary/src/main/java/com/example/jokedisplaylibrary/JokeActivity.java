@@ -2,7 +2,6 @@ package com.example.jokedisplaylibrary;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
@@ -24,7 +23,6 @@ public class JokeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         ArrayList<String> jokes = intent.getStringArrayListExtra(INTENT_KEY_JOKES);
 
-        ConstraintLayout parentLayout = findViewById(R.id.main_layout);
         RecyclerView recyclerView = findViewById(R.id.joke_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
