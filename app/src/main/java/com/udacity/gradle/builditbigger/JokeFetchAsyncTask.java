@@ -20,6 +20,7 @@ import java.util.ArrayList;
  */
 class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, ArrayList<String>> {
 
+    //Currently app only runs in an emulator
     private final String LOCAL_IP_ADDRESS = "http://10.0.2.2:8080/_ah/api/";
     private static MyApi myApiService = null;
     private OnCompletionListener listener;
