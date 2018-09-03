@@ -10,10 +10,12 @@ import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.jokedisplaylibrary.JokeActivity;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -32,9 +34,9 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     Group progressViewGroup;
     @BindView(R.id.content_group)
     Group contentViewGroup;
-    @BindView(R.id.adView)
-    AdView adView;
     private static String JOKE_TYPE = "random";
+    private static String INTERSTITIAL_AD_ID = "ca-app-pub-3940256099942544/1033173712";
+    private InterstitialAd interstitialAd;
 
     public MainActivityFragment() {
     }
@@ -43,14 +45,37 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-
         ButterKnife.bind(this, root);
-        // Create an ad request.
+        initAds();
+        return root;
+    }
+
+    /**
+     * Initialize ads
+     */
+    void initAds() {
+        // Initialize interstitial ad
+        interstitialAd = new InterstitialAd(getContext());
+        interstitialAd.setAdUnitId(INTERSTITIAL_AD_ID);
+        // make adRequest
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-        adView.loadAd(adRequest);
-        return root;
+        interstitialAd.loadAd(adRequest);
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                showContent();
+            }
+
+            @Override
+            public void onAdClosed() {
+                //when ad is closed user will be shown jokes
+                super.onAdClosed();
+                showContent();
+            }
+        });
     }
 
     @Override
@@ -61,18 +86,33 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
 
     @OnClick(R.id.tell_joke_button)
     public void tellJoke() {
+        //If ad is loaded it will be shown
+        if (interstitialAd.isLoaded()) {
+            interstitialAd.show();
+        } else {
+            //if ad didn't load user will be shown jokes
+            showContent();
+        }
+
+    }
+
+    private void showContent() {
         displayLoadingUI();
         JokeFetchAsyncTask asyncTask = new JokeFetchAsyncTask((Fragment) this);
         //noinspection unchecked
         asyncTask.execute(new Pair<Context, String>(getActivity(), JOKE_TYPE));
-
     }
 
     @Override
     public void onComplete(ArrayList<String> jokes) {
-        Intent intent = new Intent(getContext(), JokeActivity.class);
-        intent.putStringArrayListExtra(JokeActivity.INTENT_KEY_JOKES, jokes);
-        Objects.requireNonNull(getActivity()).startActivity(intent);
+        if (jokes != null && jokes.size() > 0) {
+            Intent intent = new Intent(getContext(), JokeActivity.class);
+            intent.putStringArrayListExtra(JokeActivity.INTENT_KEY_JOKES, jokes);
+            Objects.requireNonNull(getActivity()).startActivity(intent);
+        } else {
+            hideLoadingUi();
+            Toast.makeText(getContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
