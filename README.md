@@ -36,8 +36,13 @@ GCE module and passes them to the Android Library for display.
 ### Credits
 
 https://stackoverflow.com/questions/32655342/how-to-randomly-receive-a-material-design-color
+
 https://www.flaticon.com/free-icon/joke_185034
+
 https://www.uplabs.com/posts/design-quotes-app
+
 https://romannurik.github.io/AndroidAssetStudio/index.html
+
 https://stackoverflow.com/questions/9963691/android-asynctask-sending-callbacks-to-ui
+
 https://stackoverflow.com/questions/2321829/android-asynctask-testing-with-android-test-framework
