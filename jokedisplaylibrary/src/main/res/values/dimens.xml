@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="question_tv_margin_end">16dp</dimen>
+    <dimen name="question_tv_margin_left">16dp</dimen>
+    <dimen name="question_tv_margin_start">16dp</dimen>
+    <dimen name="question_tv_margin_top">88dp</dimen>
+    <dimen name="question_tv_text_size">40sp</dimen>
+    <dimen name="answer_tv_margin_bottom">32dp</dimen>
+    <dimen name="answer_tv_margin_end">16dp</dimen>
+    <dimen name="answer_tv_margin_start">16dp</dimen>
+    <dimen name="answer_tv_margin_top">8dp</dimen>
+    <dimen name="answer_tv_text_size">40sp</dimen>
+    <dimen name="question_tv_width">0dp</dimen>
+    <dimen name="answer_tv_width">0dp</dimen>
+</resources>
