@@ -5,10 +5,9 @@ import java.util.ArrayList;
 public class JokeProvider {
 
     /**
-     *
      * @return a list of Jokes
      */
-    public static ArrayList<String> getJokes(){
+    public static ArrayList<String> getJokes() {
         ArrayList<String> jokes = new ArrayList<>();
         jokes.add("Why is peter pan always flying \n Because he neverlands");
         jokes.add("What happens to a frog's car when it breaks down? \n It gets toad away");

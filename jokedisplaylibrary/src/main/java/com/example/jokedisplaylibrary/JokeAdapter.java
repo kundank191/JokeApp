@@ -16,16 +16,17 @@ import java.util.ArrayList;
 /**
  * Created by Kundan on 03-09-2018.
  */
-public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
+public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
 
     // Using material 700 colors
     private static String TYPE_COLOR = "700";
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView questionTV;
         TextView answerTV;
         ConstraintLayout parentCL;
+
         ViewHolder(View itemView) {
             super(itemView);
             questionTV = itemView.findViewById(R.id.question_tv);
@@ -45,7 +46,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(R.layout.joke_row_item,parent,false);
+        View rootView = LayoutInflater.from(context).inflate(R.layout.joke_row_item, parent, false);
         return new ViewHolder(rootView);
     }
 
@@ -65,17 +66,14 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder>{
     }
 
     /**
-     *
      * @param typeColor takes the pallete ID
      * @return a random color from a list of colors
      */
-    private int getMatColor(String typeColor)
-    {
+    private int getMatColor(String typeColor) {
         int returnColor = Color.BLACK;
         int arrayId = context.getResources().getIdentifier("mdcolor_" + typeColor, "array", context.getApplicationContext().getPackageName());
 
-        if (arrayId != 0)
-        {
+        if (arrayId != 0) {
             TypedArray colors = context.getResources().obtainTypedArray(arrayId);
             int index = (int) (Math.random() * colors.length());
             returnColor = colors.getColor(index, Color.BLACK);

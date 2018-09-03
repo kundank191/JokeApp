@@ -26,23 +26,23 @@ public class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, A
     @SuppressLint("StaticFieldLeak")
     private Context context;
 
-    JokeFetchAsyncTask(Fragment fragment){
+    JokeFetchAsyncTask(Fragment fragment) {
         try {
             listener = (OnCompletionListener) fragment;
-        } catch (ClassCastException e){
+        } catch (ClassCastException e) {
             e.printStackTrace();
             throw new ClassCastException("Activity must implement OnCompletionListener");
         }
     }
 
-    JokeFetchAsyncTask(OnCompletionListener listener){
+    JokeFetchAsyncTask(OnCompletionListener listener) {
         this.listener = listener;
     }
 
     @SafeVarargs
     @Override
     protected final ArrayList<String> doInBackground(Pair<Context, String>... params) {
-        if(myApiService == null) {  // Only do this once
+        if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     .setRootUrl(LOCAL_IP_ADDRESS)
@@ -59,7 +59,7 @@ public class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, A
         String jokeType = params[0].second;
         try {
             return (ArrayList<String>) myApiService.getJoke().execute().getJokes();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -72,7 +72,7 @@ public class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, A
         listener = null;
     }
 
-    public interface OnCompletionListener{
+    public interface OnCompletionListener {
         void onComplete(ArrayList<String> jokes);
     }
 }

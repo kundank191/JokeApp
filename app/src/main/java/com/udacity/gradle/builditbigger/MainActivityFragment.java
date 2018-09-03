@@ -26,7 +26,7 @@ import butterknife.OnClick;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask.OnCompletionListener{
+public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask.OnCompletionListener {
 
     @BindView(R.id.loading_group)
     Group progressViewGroup;
@@ -44,7 +44,7 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        ButterKnife.bind(this,root);
+        ButterKnife.bind(this, root);
         // Create an ad request.
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -60,7 +60,7 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     }
 
     @OnClick(R.id.tell_joke_button)
-    public void tellJoke(){
+    public void tellJoke() {
         displayLoadingUI();
         JokeFetchAsyncTask asyncTask = new JokeFetchAsyncTask((Fragment) this);
         //noinspection unchecked
@@ -71,14 +71,14 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     @Override
     public void onComplete(ArrayList<String> jokes) {
         Intent intent = new Intent(getContext(), JokeActivity.class);
-        intent.putStringArrayListExtra(JokeActivity.INTENT_KEY_JOKES,jokes);
+        intent.putStringArrayListExtra(JokeActivity.INTENT_KEY_JOKES, jokes);
         Objects.requireNonNull(getActivity()).startActivity(intent);
     }
 
     /**
      * Shows a loading screen when jokes are being requested
      */
-    public void displayLoadingUI(){
+    public void displayLoadingUI() {
         progressViewGroup.setVisibility(View.VISIBLE);
         contentViewGroup.setVisibility(View.GONE);
     }
@@ -86,7 +86,7 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     /**
      * Hides the loading screen when more jokes has to be requested
      */
-    public void hideLoadingUi(){
+    public void hideLoadingUi() {
         progressViewGroup.setVisibility(View.GONE);
         contentViewGroup.setVisibility(View.VISIBLE);
     }

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Kundan on 03-09-2018.
  * POJO for jokes
  */
-public class Joke implements Serializable{
+public class Joke implements Serializable {
 
     private String jokeQuestion;
     private String jokeAnswer;

@@ -24,9 +24,9 @@ public class JokeActivity extends AppCompatActivity {
         ArrayList<String> jokes = intent.getStringArrayListExtra(INTENT_KEY_JOKES);
 
         RecyclerView recyclerView = findViewById(R.id.joke_rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        jokeAdapter = new JokeAdapter(this,jokes);
+        jokeAdapter = new JokeAdapter(this, jokes);
         recyclerView.setAdapter(jokeAdapter);
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
