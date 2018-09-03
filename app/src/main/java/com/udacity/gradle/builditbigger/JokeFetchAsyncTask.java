@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Kundan on 03-09-2018.
  */
-public class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, ArrayList<String>> {
+class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, ArrayList<String>> {
 
     private final String LOCAL_IP_ADDRESS = "http://10.0.2.2:8080/_ah/api/";
     private static MyApi myApiService = null;

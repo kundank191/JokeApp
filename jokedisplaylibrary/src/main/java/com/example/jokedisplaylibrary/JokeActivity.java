@@ -12,8 +12,7 @@ import java.util.ArrayList;
 
 public class JokeActivity extends AppCompatActivity {
 
-    public static String INTENT_KEY_JOKES = "1012";
-    private JokeAdapter jokeAdapter;
+    public static final String INTENT_KEY_JOKES = "1012";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class JokeActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.joke_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        jokeAdapter = new JokeAdapter(this, jokes);
+        JokeAdapter jokeAdapter = new JokeAdapter(this, jokes);
         recyclerView.setAdapter(jokeAdapter);
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);

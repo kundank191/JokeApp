@@ -21,7 +21,7 @@ import static junit.framework.Assert.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class AsyncTaskText {
 
-    private static String JOKE_TYPE = "random";
+    private static final String JOKE_TYPE = "random";
 
     @Test
     public void testVerifyJoke() throws InterruptedException {

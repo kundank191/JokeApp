@@ -34,8 +34,8 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     Group progressViewGroup;
     @BindView(R.id.content_group)
     Group contentViewGroup;
-    private static String JOKE_TYPE = "random";
-    private static String INTERSTITIAL_AD_ID = "ca-app-pub-3940256099942544/1033173712";
+    private static final String JOKE_TYPE = "random";
+    private static final String INTERSTITIAL_AD_ID = "ca-app-pub-3940256099942544/1033173712";
     private InterstitialAd interstitialAd;
 
     public MainActivityFragment() {

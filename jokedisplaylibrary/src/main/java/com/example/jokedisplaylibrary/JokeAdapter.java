@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
 
     // Using material 700 colors
-    private static String TYPE_COLOR = "700";
+    private static final String TYPE_COLOR = "700";
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
