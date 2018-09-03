@@ -27,14 +27,16 @@ public class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, A
     private Context context;
 
     JokeFetchAsyncTask(Fragment fragment){
-        this.context = fragment.getContext();
         try {
             listener = (OnCompletionListener) fragment;
         } catch (ClassCastException e){
             e.printStackTrace();
             throw new ClassCastException("Activity must implement OnCompletionListener");
         }
+    }
 
+    JokeFetchAsyncTask(OnCompletionListener listener){
+        this.listener = listener;
     }
 
     @SafeVarargs
@@ -61,11 +63,6 @@ public class JokeFetchAsyncTask extends AsyncTask<Pair<Context, String>, Void, A
             e.printStackTrace();
             return null;
         }
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override
