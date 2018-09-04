@@ -1,0 +1,23 @@
+Warning: Google App Engine Java 7 runtime is deprecated.
+Warning: See https://cloud.google.com/appengine/docs/deprecations/java7
+Sep 04, 2018 1:11:30 PM java.util.prefs.WindowsPreferences <init>
+WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.
+Sep 04, 2018 1:11:32 PM com.google.appengine.tools.development.SystemPropertiesManager setSystemProperties
+INFO: Overwriting system property key 'java.util.logging.config.file', value 'C:\Users\kunda\AppData\Local\Google\Cloud SDK\google-cloud-sdk\platform\google_appengine\google\appengine\tools\java\config\sdk\logging.properties' with value 'WEB-INF/logging.properties' from 'X:\Android\Android Nanodegree\Projects\JokeApp\backend\build\exploded-backend\WEB-INF\appengine-web.xml'
+Sep 04, 2018 1:11:32 PM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: Logging to JettyLogger(null) via com.google.apphosting.utils.jetty.JettyLogger
+Sep 04, 2018 7:41:33 AM com.google.appengine.tools.development.IsolatedAppClassLoader checkWorkingDirectory
+WARNING: Your working directory, (X:\Android\Android Nanodegree\Projects\JokeApp\backend) is not equal to your 
+web application root (X:\Android\Android Nanodegree\Projects\JokeApp\backend\build\exploded-backend)
+You will not be able to access files from your working directory on the production server.
+
+Sep 04, 2018 7:41:34 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: jetty-6.1.x
+Sep 04, 2018 7:41:38 AM com.google.apphosting.utils.jetty.JettyLogger info
+INFO: Started SelectChannelConnector@localhost:8080
+Sep 04, 2018 7:41:38 AM com.google.appengine.tools.development.AbstractModule startup
+INFO: Module instance default is running at http://localhost:8080/
+Sep 04, 2018 7:41:38 AM com.google.appengine.tools.development.AbstractModule startup
+INFO: The admin console is running at http://localhost:8080/_ah/admin
+Sep 04, 2018 1:11:38 PM com.google.appengine.tools.development.DevAppServerImpl doStart
+INFO: Dev App Server is now running

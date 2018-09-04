@@ -35,7 +35,7 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     @BindView(R.id.content_group)
     Group contentViewGroup;
     private static final String JOKE_TYPE = "random";
-    private static final String INTERSTITIAL_AD_ID = "ca-app-pub-3940256099942544/1033173712";
+    private String INTERSTITIAL_AD_ID;
     private InterstitialAd interstitialAd;
 
     public MainActivityFragment() {
@@ -46,6 +46,7 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, root);
+        INTERSTITIAL_AD_ID = getString(R.string.interstitial_ad_unit_id);
         initAds();
         return root;
     }
@@ -118,7 +119,7 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     /**
      * Shows a loading screen when jokes are being requested
      */
-    public void displayLoadingUI() {
+    void displayLoadingUI() {
         progressViewGroup.setVisibility(View.VISIBLE);
         contentViewGroup.setVisibility(View.GONE);
     }
@@ -126,7 +127,7 @@ public class MainActivityFragment extends Fragment implements JokeFetchAsyncTask
     /**
      * Hides the loading screen when more jokes has to be requested
      */
-    public void hideLoadingUi() {
+    void hideLoadingUi() {
         progressViewGroup.setVisibility(View.GONE);
         contentViewGroup.setVisibility(View.VISIBLE);
     }
